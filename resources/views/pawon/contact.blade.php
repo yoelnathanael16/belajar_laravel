@@ -28,9 +28,9 @@
                     <textarea name="m" rows="4" placeholder="Tulis Pertanyaan Anda di sini" required></textarea>
                 </label>
                 <button class="btn" type="submit">Kirim</button>
-                <p class("ok" id("ok" role("status" hidden>Pertanyaan terkirim. Kami akan membalas lewat email Anda.</p>
-                <p class("small c">Atau, chat langsung:</p>
-                <a class("btn wa" href("https://wa.me/6281213865343">Tanya Via WhatsApp</a>
+                <p class="ok" id="ok" role="status" hidden>Pertanyaan terkirim. Kami akan membalas lewat email Anda.</p>
+                <p class="small c">Atau, chat langsung:</p>
+                <a class="btn wa" href="https://wa.me/6281213865343">Tanya Via WhatsApp</a>
             </form>
         </div>
     </section>
