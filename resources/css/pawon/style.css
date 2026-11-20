@@ -17,7 +17,15 @@ body{
     margin:0;
     background:var(--bg);
     color:var(--tx);
-    font:16px/1.55 var(--font-body)
+    font:16px/1.55 var(--font-body);
+    /* footer tetap di dasar layar walau konten pendek */
+    min-height:100vh;
+    display:flex;
+    flex-direction:column
+}
+
+main{
+    flex:1
 }
 
 h1,
