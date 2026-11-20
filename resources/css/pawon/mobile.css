@@ -1,0 +1,124 @@
+/* Pawon Ratu Roso - tampilan mobile (dimuat setelah style.css) */
+.tabbar{display:none}
+
+@media (max-width:760px){
+  :root{--tab-h:64px}
+  html{-webkit-text-size-adjust:100%}
+  body{padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom))}
+  main{overflow-x:clip}
+
+  /* top bar */
+  .nav{padding:8px 16px;padding-top:calc(8px + env(safe-area-inset-top))}
+  .brand{gap:10px;font-size:1.25rem}
+  .brand img{width:40px;height:40px}
+  .burger{display:grid;place-items:center;width:44px;height:44px;font-size:1.7rem;border-radius:12px}
+  .burger:active{background:#ffffff1f}
+  .nav nav{max-height:calc(100vh - 64px);overflow:auto;padding:8px 16px 20px;gap:0;box-shadow:0 12px 24px #0006}
+  .nav nav a{display:block;width:100%;padding:14px 4px;font-size:1.05rem;border-bottom:1px solid #ffffff1f;opacity:.85}
+  .nav nav #authSlot{width:100%;padding-top:12px}
+  .nav nav .btn-nav,.nav nav .prof-l{width:100%;justify-content:center;border-bottom:0;padding:12px}
+
+  /* bottom tab bar */
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:25;
+    background:var(--nav);padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -4px 16px #0004}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:var(--tab-h);
+    color:#f1e8d6;opacity:.6;text-decoration:none;font-size:.7rem;font-weight:500;-webkit-tap-highlight-color:transparent}
+  .tabbar a svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .tabbar a.on{opacity:1;font-weight:700}
+  .tabbar a.on span{border-bottom:2px solid #c9a77d}
+
+  /* general */
+  .wrap{padding:24px 16px}
+  h2{font-size:1.7rem;margin:24px 0 14px}
+  .btn{min-height:48px;padding:12px 20px}
+  input,select,textarea{font-size:16px;min-height:48px}
+  textarea{min-height:110px}
+
+  /* home */
+  .hero{padding:20px 16px 8px;gap:24px;display:flex;flex-direction:column-reverse}
+  .hero h1{font-size:2.4rem}
+  .hero p{font-size:1.05rem}
+  .hero .btn{display:block;width:100%;margin:0 0 10px}
+  .hero img{aspect-ratio:4/3;border-radius:20px}
+  .about{gap:20px}
+  .stats{gap:36px}.stats b{font-size:2.6rem}
+  .lead{font-size:1.35rem;text-align:left}
+  .big{font-size:3rem}
+  .bookband{gap:20px}.bookband .btn{display:block}
+
+  /* kartu menu: 2 kolom */
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .item{padding:8px;border-radius:14px}
+  .item img,.ph{border-radius:10px}
+  .item h3{font-size:1.15rem;margin:8px 0 2px}
+  .item p{font-size:.75rem;line-height:1.3}
+  .item .pr{font-size:.95rem}
+  .sec{margin-top:20px}
+  .sec h2 small{display:block;margin:4px 0 0;font-size:.9rem}
+  .sec h3.sub{font-size:1.25rem;margin:16px 0 10px}
+
+  /* menu: pencarian + chip kategori menempel di bawah top bar */
+  .menutools{position:sticky;top:56px;z-index:10;background:var(--bg);margin:0 -16px;padding:8px 16px 0;gap:8px}
+  .menutools input{max-width:none;flex:1 1 100%}
+  #count{font-size:.8rem;opacity:.7}
+  .catbar{display:flex;flex:1 1 100%;gap:8px;overflow-x:auto;margin:0 -16px;padding:4px 16px 10px;
+    scrollbar-width:none;border-bottom:1px solid #d9c3a0}
+  .catbar[hidden]{display:none}
+  .catbar::-webkit-scrollbar{display:none}
+  .catbar button{flex:none;min-height:40px;padding:0 16px;border:1.5px solid var(--br);border-radius:99px;background:none;
+    color:var(--br);font:500 .9rem "DM Sans",sans-serif;white-space:nowrap}
+  .catbar button.on{background:var(--br);color:#fff}
+  .item,.sec{scroll-margin-top:170px}
+
+  /* booking */
+  .wiz{margin:8px 0;padding:16px;border-radius:18px}
+  .steps{font-size:.62rem;margin-bottom:14px}.steps li{overflow:hidden;text-overflow:ellipsis}
+  #pane h2{font-size:1.5rem}
+  .opts.ev .opt{flex:1 1 100%;min-height:56px}
+  .opts .opt{min-height:48px}
+  .cat2{grid-template-columns:1fr 1fr;gap:10px}.cat2 .opt{padding:18px 8px;font-size:1.3rem}
+  .rows{max-height:none;overflow:visible}
+  .row{padding:10px 12px}
+  .qty button{width:40px;height:40px;font-size:1.2rem}
+  .wizbar{position:sticky;bottom:calc(var(--tab-h) + env(safe-area-inset-bottom));background:var(--card);margin:16px -16px -16px;
+    padding:12px 16px;border-radius:0 0 18px 18px;box-shadow:0 -6px 14px #0002;flex-wrap:wrap}
+  .wizbar #sum{order:-1;flex:1 1 100%;text-align:center}
+  .wizbar .btn{flex:1}
+  .sumt div{flex-direction:column;gap:2px}
+  .gate{margin:16px auto}
+
+  /* auth, contact, profile */
+  .authpage main{min-height:calc(100vh - 140px);padding:16px;align-items:start}
+  .authbox{padding:20px 18px}
+  .contact{padding:18px;border-radius:20px;gap:20px}.contact h1{font-size:2rem}
+  .prof{gap:16px}
+  .ord .btn{width:100%}
+  .tabs button{flex:1}
+
+  /* footer */
+  .foot{padding:32px 16px;gap:24px}
+  .foot h2{font-size:2.2rem;max-width:none}
+  .foot ul a{display:inline-block;padding:6px 0}
+
+  /* chatbot jadi bottom sheet */
+  .fab{right:16px;bottom:calc(var(--tab-h) + env(safe-area-inset-bottom) + 16px);width:56px;height:56px}
+  .bot{left:0;right:0;bottom:0;width:100%;height:80vh;height:80dvh;border-radius:20px 20px 0 0;border-width:1.5px 0 0}
+  .bot header{padding:14px 16px}
+  .bot header button{width:44px;height:44px}
+  .msgs{padding:12px}
+  .m{max-width:92%}
+  .mi{min-height:44px}
+  .chips{flex-wrap:nowrap;overflow-x:auto;max-height:none;scrollbar-width:none}
+  .chips button{flex:none;min-height:36px;padding:0 14px}
+  .bot form{padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+  .pg-booking .fab{bottom:calc(var(--tab-h) + env(safe-area-inset-bottom) + 120px)}
+  body.chat-open{overflow:hidden}
+  body.chat-open .tabbar{display:none}
+}
+
+@media (max-width:380px){
+  .brand span{font-size:1.05rem}
+  .grid{gap:8px}
+  .item h3{font-size:1.05rem}
+  .stats{gap:24px}
+}

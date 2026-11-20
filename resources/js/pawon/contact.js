@@ -1,0 +1,2 @@
+document.getElementById('contactForm').onsubmit=function(e){e.preventDefault();const P=window.Pawon,d=Object.fromEntries(new FormData(this));
+const l=P.get('pawon_messages',[]);l.push({...d,at:new Date().toISOString()});P.set('pawon_messages',l);this.reset();document.getElementById('ok').hidden=false;};

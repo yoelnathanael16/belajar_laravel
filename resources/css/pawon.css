@@ -1,0 +1,3 @@
+/* Entry CSS untuk halaman Pawon Ratu Roso (tanpa Bootstrap, agar reset Bootstrap tidak bentrok) */
+@import './pawon/style.css';
+@import './pawon/mobile.css';
