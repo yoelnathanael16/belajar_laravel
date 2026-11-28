@@ -11,7 +11,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Akun yang sudah masuk lalu membuka /masuk atau /daftar: admin ke panel admin, pelanggan ke profil
+        $middleware->redirectUsersTo(fn ($request) => $request->user()->homeUrl());
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -11,7 +11,13 @@
         <a href="{{ route('booking') }}" @class(['on' => request()->routeIs('booking')])>Booking</a>
         <a href="{{ route('contact') }}" @class(['on' => request()->routeIs('contact')])>Hubungi Kami</a>
         <span id="authSlot">
-            <a class="btn-nav" href="{{ route('register') }}">Daftar</a>
+            @auth
+                <a href="{{ route('profile') }}" @class(['prof-l', 'on' => request()->routeIs('profile')])><i></i>Profil</a>
+            @elseif (request()->routeIs('login'))
+                <a class="btn-nav out" href="{{ route('login') }}">Masuk</a>
+            @else
+                <a @class(['btn-nav', 'out' => request()->routeIs('register')]) href="{{ route('register') }}">Daftar</a>
+            @endauth
         </span>
     </nav>
 </header>

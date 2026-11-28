@@ -2,13 +2,13 @@
 
 namespace App\Support;
 
-use Illuminate\Support\Facades\File;
+use App\Models\Menu;
 
 /**
- * Sumber data menu Pawon Ratu Roso.
+ * Data menu untuk halaman pelanggan, diambil dari tabel menus.
  *
- * Saat ini membaca resources/data/menu.json. Nanti bisa diganti ke tabel MySQL
- * cukup dengan mengubah isi all() agar mengembalikan struktur yang sama.
+ * Bentuk datanya sama dengan resources/data/menu.json, supaya JavaScript
+ * (resources/js/pawon/menu-data.js) tidak perlu diubah.
  */
 class MenuCatalog
 {
@@ -17,10 +17,23 @@ class MenuCatalog
      */
     public function all(): array
     {
-        return json_decode(
-            File::get(resource_path('data/menu.json')),
-            associative: true,
-            flags: JSON_THROW_ON_ERROR,
-        );
+        // Menu yang dimatikan admin (tersedia = false) tidak tampil di website
+        $menus = Menu::where('tersedia', true)->orderBy('id')->get();
+
+        return [
+            'favorites' => $menus->where('favorit', true)->pluck('slug')->values()->all(),
+            'items' => $menus->map(fn (Menu $m) => [
+                'id' => $m->slug,
+                'name' => $m->nama_menu,
+                'desc' => $m->keterangan ?? '',
+                'price' => $m->harga,
+                'unit' => $m->satuan,
+                'cat' => $m->subkategori ? "{$m->kategori}|{$m->subkategori}" : $m->kategori,
+                // Foto bawaan: nama file (dicari Pawon.img), foto unggahan admin: URL lengkap
+                'img' => $m->foto && str_contains($m->foto, '/') ? $m->foto_url : ($m->foto ?? ''),
+                'cold' => $m->harga_dingin ?? 0,
+                'tags' => $m->tags ?? '',
+            ])->all(),
+        ];
     }
 }

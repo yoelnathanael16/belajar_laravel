@@ -7,7 +7,6 @@ use App\Models\BookingItem;
 use App\Models\Menu;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Booking>
@@ -19,22 +18,17 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         return [
-            'kode_pesanan' => 'BK-' . now()->format('Ymd') . '-' . strtoupper(Str::random(5)),
             'user_id' => User::factory(),
-            'jenis_acara' => fake()->randomElement([
-                'Pernikahan', 'Ulang Tahun', 'Rapat Kantor', 'Arisan',
-                'Syukuran', 'Aqiqah', 'Seminar', 'Reuni',
-            ]),
-            'jumlah_tamu' => fake()->numberBetween(10, 500),
-            'tanggal' => fake()->dateTimeBetween('+1 week', '+3 months')->format('Y-m-d'),
-            'jam' => fake()->randomElement(['08:00', '10:00', '12:00', '16:00', '18:00', '19:00']),
+            'jenis_acara' => fake()->randomElement(Booking::JENIS_ACARA),
+            'jumlah_tamu' => fake()->randomElement(Booking::JUMLAH_TAMU),
+            'tanggal' => fake()->dateTimeBetween('-1 month', '+2 months')->format('Y-m-d'),
+            'jam' => fake()->randomElement(Booking::JAM),
             'total_harga' => 0, // dihitung ulang lewat state withItems()
-            'status' => fake()->randomElement(['menunggu', 'dikonfirmasi', 'ditolak', 'selesai', 'dibatalkan']),
+            'status' => fake()->randomElement(['menunggu', 'dikonfirmasi', 'ditolak', 'selesai']),
             'alasan_penolakan' => fn (array $attrs) => $attrs['status'] === 'ditolak'
                 ? fake()->randomElement([
-                    'Tanggal sudah penuh.',
+                    'Meja belum tersedia pada tanggal dan jam tersebut.',
                     'Jumlah tamu melebihi kapasitas kami.',
-                    'Lokasi acara di luar jangkauan pengiriman.',
                 ])
                 : null,
         ];

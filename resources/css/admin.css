@@ -1,0 +1,54 @@
+/* Panel admin Pawon Ratu Roso. Tampilan dasar dulu, dirapikan sesuai Figma nanti. */
+:root{--nav:#54341e;--bg:#f1e8d6;--card:#faf5e9;--line:#e3d3b8;--br:#8c5a2b;--tx:#54341e;--gr:#4f6b33;--red:#b3261e;--wa:#25d366}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Poppins",system-ui,sans-serif;font-size:14px;color:var(--tx);background:var(--bg)}
+h1,h2{font-family:Georgia,serif;margin:0 0 4px}
+a{color:var(--br)}
+.adm{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+.side{background:var(--nav);color:#f1e8d6;padding:24px 16px;display:flex;flex-direction:column;gap:6px}
+.side .brand{font-family:Georgia,serif;font-size:22px;margin-bottom:20px}
+.side .brand small{display:block;font:12px "Poppins",sans-serif;opacity:.7}
+.side nav a{display:flex;justify-content:space-between;padding:10px 12px;border-radius:8px;color:inherit;text-decoration:none}
+.side nav a.on,.side nav a:hover{background:#7a5232}
+.side .badge{background:#d9a441;color:var(--nav);border-radius:99px;padding:0 8px;font-weight:700}
+.side .me{margin-top:auto;font-size:12px}
+.side .me b{display:block;font-size:14px}
+.main{padding:28px 32px;min-width:0}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:20px}
+.small{font-size:12px;opacity:.75;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.grid4 b{display:block;font-size:28px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.btn{display:inline-block;border:1px solid var(--br);background:var(--br);color:#fff;border-radius:8px;padding:7px 14px;font:inherit;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--br)}
+.btn.green{background:var(--gr);border-color:var(--gr)}
+.btn.red{background:transparent;border-color:var(--red);color:var(--red)}
+.btn.wa{background:var(--wa);border-color:var(--wa);display:block;text-align:center}
+.btn.full{width:100%}
+.flash{background:#e6f0dc;border:1px solid #b9cfa3;border-radius:8px;padding:10px 14px;margin-bottom:16px}
+.flash.err{background:#f8e1df;border-color:#e4b3ae}
+input,select,textarea{font:inherit;color:inherit;border:1px solid var(--line);border-radius:6px;padding:6px 8px;background:#fff;width:100%}
+table{width:100%;border-collapse:collapse}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;text-align:left;padding:8px;opacity:.7}
+td{padding:8px;border-top:1px solid var(--line);vertical-align:middle}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.tabs a{border:1px solid var(--line);border-radius:99px;padding:4px 12px;text-decoration:none;color:inherit;background:#fff}
+.tabs a.on{background:var(--br);border-color:var(--br);color:#fff}
+.pill{display:inline-block;border-radius:99px;padding:2px 10px;font-size:12px;background:#f3e2b5}
+.pill.dikonfirmasi{background:#dcebcf}.pill.ditolak{background:#f6d6d3}.pill.selesai{background:#e5e0d6}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}
+.card:has(>table),.split>section,form.card{overflow-x:auto}
+.detail dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:0 0 12px}
+.detail dt{opacity:.7}.detail dd{margin:0;text-align:right;font-weight:500}
+.detail h3{font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin:14px 0 6px}
+.reason{background:#f8e1df;border-radius:8px;padding:8px 10px}
+.stack{display:grid;gap:8px;margin-top:12px}
+.thumb{width:40px;height:40px;object-fit:cover;border-radius:6px;background:#eadcc2;display:block}
+.money{width:110px}
+dialog{border:0;border-radius:12px;padding:20px;width:min(460px,92vw);background:var(--card);color:inherit}
+dialog::backdrop{background:#0006}
+dialog label{display:block;margin-bottom:10px;font-weight:500}
+.pager{margin-top:12px}

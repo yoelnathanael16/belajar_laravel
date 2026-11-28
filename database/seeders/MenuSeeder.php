@@ -4,35 +4,33 @@ namespace Database\Seeders;
 
 use App\Models\Menu;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class MenuSeeder extends Seeder
 {
+    /**
+     * Isi tabel menus dari resources/data/menu.json (54 menu yang tampil di website).
+     */
     public function run(): void
     {
-        $menus = [
-            ['Nasi Kuning', 'Nasi kuning gurih dengan bumbu rempah khas.', 'Makanan Utama', 'Tumpeng', 25000],
-            ['Nasi Putih', 'Nasi putih pulen.', 'Makanan Utama', 'Prasmanan', 8000],
-            ['Ayam Bakar Madu', 'Ayam bakar dengan olesan madu dan bumbu kecap.', 'Lauk', 'Prasmanan', 22000],
-            ['Ayam Goreng Kremes', 'Ayam goreng bumbu kuning dengan kremesan renyah.', 'Lauk', 'Nasi Box', 20000],
-            ['Rendang Sapi', 'Daging sapi dimasak lama dengan santan dan rempah.', 'Lauk', 'Prasmanan', 35000],
-            ['Sate Ayam', 'Sate ayam bumbu kacang, 10 tusuk per porsi.', 'Lauk', 'Prasmanan', 28000],
-            ['Capcay Kuah', 'Tumis aneka sayur dengan kuah gurih.', 'Sayur', 'Prasmanan', 15000],
-            ['Gado-Gado', 'Sayuran rebus dengan saus kacang.', 'Sayur', 'Prasmanan', 15000],
-            ['Es Teh Manis', 'Teh manis dingin.', 'Minuman', 'Prasmanan', 5000],
-            ['Es Buah', 'Aneka buah segar dengan sirup dan susu.', 'Dessert', 'Prasmanan', 12000],
-            ['Pudding Coklat', 'Pudding coklat lembut dengan vla.', 'Dessert', 'Snack Box', 10000],
-            ['Risoles Ragout', 'Risoles isi ragout ayam dan sayuran.', 'Snack', 'Snack Box', 8000],
-            ['Kue Lapis', 'Kue lapis tradisional manis dan kenyal.', 'Snack', 'Snack Box', 6000],
-        ];
+        $data = json_decode(File::get(resource_path('data/menu.json')), true, flags: JSON_THROW_ON_ERROR);
 
-        foreach ($menus as [$nama, $keterangan, $kategori, $jenis, $harga]) {
+        foreach ($data['items'] as $item) {
+            // "Menu 12k|Nasi" -> kategori "Menu 12k", subkategori "Nasi"
+            [$kategori, $subkategori] = array_pad(explode('|', $item['cat'], 2), 2, null);
+
             Menu::create([
-                'nama_menu' => $nama,
-                'keterangan' => $keterangan,
+                'slug' => $item['id'],
+                'nama_menu' => $item['name'],
+                'keterangan' => $item['desc'] ?: null,
                 'kategori' => $kategori,
-                'jenis' => $jenis,
-                'harga' => $harga,
-                'foto' => null,
+                'subkategori' => $subkategori,
+                'harga' => $item['price'],
+                'harga_dingin' => $item['cold'] ?: null,
+                'satuan' => $item['unit'],
+                'tags' => $item['tags'] ?: null,
+                'foto' => $item['img'] ?: null,
+                'favorit' => in_array($item['id'], $data['favorites'], true),
                 'tersedia' => true,
             ]);
         }

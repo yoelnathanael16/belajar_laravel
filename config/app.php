@@ -65,7 +65,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // Restoran di Malang (WIB), supaya today() dan tanggal booking tidak bergeser
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------

@@ -23,8 +23,6 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'no_whatsapp' => '08' . fake()->numerify('##########'),
             'role' => 'customer',
-            // session_token diisi otomatis oleh Laravel saat login dengan "remember me"
-            'session_token' => null,
         ];
     }
 

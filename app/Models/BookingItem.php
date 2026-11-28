@@ -10,8 +10,6 @@ class BookingItem extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'item_id';
-
     protected $fillable = [
         'booking_id',
         'menu_id',
@@ -31,11 +29,11 @@ class BookingItem extends Model
 
     public function booking(): BelongsTo
     {
-        return $this->belongsTo(Booking::class, 'booking_id');
+        return $this->belongsTo(Booking::class);
     }
 
     public function menu(): BelongsTo
     {
-        return $this->belongsTo(Menu::class, 'menu_id');
+        return $this->belongsTo(Menu::class);
     }
 }

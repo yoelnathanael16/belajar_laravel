@@ -11,20 +11,18 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $primaryKey = 'user_id';
-
     protected $fillable = [
         'nama',
         'email',
         'password',
         'no_whatsapp',
+        // Aman: AuthController hanya menyimpan field yang sudah divalidasi, role tidak termasuk
         'role',
-        'session_token',
     ];
 
     protected $hidden = [
         'password',
-        'session_token',
+        'remember_token',
     ];
 
     protected function casts(): array
@@ -34,22 +32,27 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Arahkan fitur "remember me" bawaan Laravel ke kolom session_token.
-     * Jadi Auth::attempt($credentials, remember: true) otomatis memakai kolom ini.
-     */
-    public function getRememberTokenName(): string
-    {
-        return 'session_token';
-    }
-
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }
 
+    /** Halaman tujuan setelah masuk. */
+    public function homeUrl(): string
+    {
+        return route($this->isAdmin() ? 'admin.dashboard' : 'profile');
+    }
+
+    /** Link chat WhatsApp ke nomor akun ini (08xx -> 628xx). */
+    public function whatsappUrl(string $pesan = ''): string
+    {
+        $nomor = preg_replace('/^(0|62)/', '62', preg_replace('/\D/', '', $this->no_whatsapp));
+
+        return "https://wa.me/{$nomor}" . ($pesan === '' ? '' : '?text=' . rawurlencode($pesan));
+    }
+
     public function bookings(): HasMany
     {
-        return $this->hasMany(Booking::class, 'user_id');
+        return $this->hasMany(Booking::class);
     }
 }

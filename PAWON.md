@@ -19,8 +19,8 @@ Halaman latihan Bootstrap yang lama ada di `/welcome`.
 | --- | --- |
 | `routes/web.php` | rute bernama (`home`, `about`, `menu`, `booking`, `contact`, `login`, `register`, `profile`) |
 | `app/Http/Controllers/PageController.php` | satu method per halaman |
-| `app/Support/MenuCatalog.php` | membaca data menu (siap diganti ke MySQL) |
-| `resources/data/menu.json` | 54 menu + daftar menu favorit |
+| `app/Support/MenuCatalog.php` | membaca menu yang `tersedia` dari tabel `menus` |
+| `resources/data/menu.json` | sumber data awal untuk `MenuSeeder` (54 menu + menu favorit) |
 | `resources/views/pawon/` | `layouts/app`, `partials/header`, `partials/footer`, satu view per halaman |
 | `resources/css/pawon.css` | entry CSS (mengimpor `pawon/style.css` dan `pawon/mobile.css`) |
 | `resources/js/pawon/` | skrip lama (modul) + `pages/*.js` sebagai entry Vite per halaman |
@@ -32,4 +32,5 @@ Halaman latihan Bootstrap yang lama ada di `/welcome`.
   JS memakai `Pawon.url('menu.html')` untuk mengubah nama berkas lama menjadi URL rute Laravel.
 - Data menu dikirim Blade sebagai `<script type="application/json" id="pawon-menu">`, dibaca oleh `menu-data.js`.
 - Halaman Pawon tidak memuat Bootstrap (`resources/css/app.css` tetap untuk halaman latihan), agar reset Bootstrap tidak mengubah tampilan.
+- Setelah mengubah migration atau seeder, jalankan `php artisan migrate:fresh --seed`.
 - Akun, booking, dan pesanan masih disimpan di `localStorage` browser (sama seperti versi HTML). Langkah berikutnya: pindahkan ke tabel MySQL.

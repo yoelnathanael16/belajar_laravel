@@ -9,14 +9,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id();
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('no_whatsapp', 20);
             $table->enum('role', ['admin', 'customer'])->default('customer');
-            // Dipakai untuk fitur "remember me" (lihat getRememberTokenName() di model User)
-            $table->string('session_token', 100)->nullable()->index();
+            $table->rememberToken();
             $table->timestamps();
         });
 

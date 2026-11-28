@@ -10,14 +10,17 @@
         <p class="kick">Halaman masuk</p>
         <h1>Selamat Datang Kembali</h1>
         <p>Senang bertemu Anda lagi. Masuk untuk melanjutkan.</p>
-        <form id="authForm" data-mode="masuk" novalidate>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
             <label>Email
-                <input name="email" type="email" required autocomplete="email">
+                <input name="email" type="email" value="{{ old('email') }}" required autocomplete="email">
             </label>
             <label>Kata sandi
                 <input name="password" type="password" required autocomplete="current-password">
             </label>
-            <p class="err" id="err" role="alert" hidden></p>
+            @if ($errors->any())
+                <p class="err" role="alert">{{ $errors->first() }}</p>
+            @endif
             <button class="btn" type="submit">Masuk</button>
         </form>
         <p class="alt">Belum punya akun? <a href="{{ route('register') }}">Gabung sekarang</a></p>

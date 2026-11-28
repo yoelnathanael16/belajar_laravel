@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Menu;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Menu>
@@ -15,19 +16,22 @@ class MenuFactory extends Factory
     public function definition(): array
     {
         $nama = fake()->randomElement([
-            'Nasi Kuning', 'Nasi Liwet', 'Ayam Bakar Madu', 'Ayam Goreng Kremes',
-            'Rendang Sapi', 'Sate Ayam', 'Soto Betawi', 'Gado-Gado',
-            'Pepes Ikan', 'Capcay Kuah', 'Es Teh Manis', 'Es Jeruk',
-            'Pudding Coklat', 'Es Buah', 'Risoles', 'Kue Lapis',
+            'Sayur Asem', 'Tempe Penyet', 'Ayam Bakar', 'Pepes Tuna',
+            'Garang Asem', 'Bakwan', 'Teh Manis', 'Kopi Susu',
         ]);
 
         return [
+            'slug' => Str::slug($nama) . '-' . fake()->unique()->numerify('####'),
             'nama_menu' => $nama,
-            'keterangan' => fake('id_ID')->sentence(10),
-            'kategori' => fake()->randomElement(['Makanan Utama', 'Lauk', 'Sayur', 'Minuman', 'Dessert', 'Snack']),
-            'jenis' => fake()->randomElement(['Prasmanan', 'Nasi Box', 'Tumpeng', 'Snack Box']),
-            'harga' => fake()->numberBetween(5, 150) * 1000,
+            'keterangan' => fake('id_ID')->sentence(6),
+            'kategori' => fake()->randomElement(['Menu Utama', 'Menu Daging', 'Menu Cemilan', "Menu Ombe'an"]),
+            'subkategori' => null,
+            'harga' => fake()->numberBetween(5, 30) * 1000,
+            'harga_dingin' => null,
+            'satuan' => 'porsi',
+            'tags' => null,
             'foto' => null,
+            'favorit' => false,
             'tersedia' => fake()->boolean(90),
         ];
     }
