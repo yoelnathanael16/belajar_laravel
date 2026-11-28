@@ -27,7 +27,7 @@
             <p class="lead">Pawon berarti dapur dalam bahasa Jawa, dan di sinilah rasa Jawa yang hangat kami jaga. Pawon Ratu Roso menyajikan sayur, lauk, dan jajanan rumahan dengan bumbu yang mengingatkan Anda pada masakan nenek. Rasakan kenikmatan sederhana yang membuat rindu untuk kembali.</p>
         </div>
     </section>
-    <section class="wrap">
+    <section class="wrap wide">
         <h2>Menu Favorit</h2>
         <div class="grid" id="favGrid"></div>
         <h2>Menu Baru</h2>

@@ -21,7 +21,7 @@
         <link rel="icon" href="{{ Vite::asset('resources/images/pawon/logo.png') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
         @vite(['resources/css/pawon.css', 'resources/js/pawon/pages/' . trim($__env->yieldContent('script')) . '.js'])
     </head>
     {{-- data-user dibaca Pawon.me() di app.js (kosong untuk tamu) --}}
@@ -31,7 +31,10 @@
         <main>
             @yield('content')
         </main>
-        @include('pawon.partials.footer')
+        {{-- di desain Figma footer hanya ada di Beranda --}}
+        @if (request()->routeIs('home'))
+            @include('pawon.partials.footer')
+        @endif
         @isset($menu)
             <script type="application/json" id="pawon-menu">@json($menu, JSON_HEX_TAG | JSON_UNESCAPED_UNICODE)</script>
         @endisset

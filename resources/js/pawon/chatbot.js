@@ -18,6 +18,8 @@ function reply(raw){const t=norm(raw),out={text:'',items:[],links:[]};
  if(/jam buka|buka jam|tutup|jam operasional|buka kah|kapan buka/.test(t)||/\bjam\b/.test(t)&&/buka/.test(t)){out.text=hrs;return out}
  if(/alamat|lokasi|dimana|di mana|maps|arah/.test(t)){out.text='Kanigoro, Tirtomoyo, Kec. Pakis, Kabupaten Malang, Jawa Timur 65154.';return out}
  if(/\bwa\b|whatsapp|nomor|telepon|telpon|kontak|hubungi/.test(t)){out.text='WhatsApp / telepon: +62 812 1386 5343.';out.links.push(['Chat via WhatsApp','https://wa.me/'+P.WA]);return out}
+ /* tombol "Order via GoFood / GrabFood" di desain Figma; link toko belum ada, jadi arahkan cari di aplikasi */
+ if(/go ?food|gojek|grab ?food|\bgrab\b|pesan antar|delivery/.test(t)){const g=/grab/.test(t);out.text=`Pesan antar lewat ${g?'GrabFood':'GoFood'}: buka aplikasi ${g?'Grab':'Gojek'}, pilih ${g?'GrabFood':'GoFood'}, lalu cari "Pawon Ratu Roso".`;return out}
  if(/booking|reservasi|pesan meja|pesan tempat|book/.test(t)){out.text='Booking meja dilakukan lewat halaman Booking dengan 5 langkah (acara, jumlah tamu, waktu, menu, konfirmasi). Ketersediaan meja dikonfirmasi admin lewat WhatsApp.';out.links.push(['Buka halaman Booking',P.url('booking.html')]);return out}
  if(/weekend|akhir pekan|sabtu|minggu/.test(t)){const w=P.menu.filter(m=>m.weekend);out.text='Menu Khusus Weekend hanya tersedia Sabtu & Minggu'+(isWk()?' (hari ini tersedia):':' (hari ini belum tersedia):');out.items=w;return out}
  for(const k of [['ulang',/ulang tahun|ultah|birthday/],['kantor',/kantor|organisasi|rapat|meeting|kerja/],['keluarga',/keluarga|reuni|arisan|kumpul/]]){if(k[1].test(t)){const e=EV[k[0]];out.text='Untuk '+e.t+' saya sarankan:';out.items=pick(e.ids,6);out.links.push(['Mulai booking',P.url('booking.html')]);return out}}
@@ -44,7 +46,8 @@ wrap.innerHTML=`<button class="fab" aria-label="Buka chat Tanya Pawon" aria-expa
 <div class="chips"></div><form><input aria-label="Tulis pesan" placeholder="Tanya menu atau rekomendasi..." autocomplete="off"><button class="btn" type="submit">Kirim</button></form></section>`;
 document.body.append(...wrap.children);
 const fab=document.querySelector('.fab'),box=document.querySelector('.bot'),msgs=box.querySelector('.msgs'),chips=box.querySelector('.chips'),form=box.querySelector('form'),inp=form.querySelector('input');
-const CH=['Jam buka','Alamat','Rekomendasi menu','Menu pedas','Minuman segar','Menu vegetarian','Untuk ulang tahun','Untuk acara kantor','Untuk reuni keluarga','Menu weekend','Camilan di bawah 15 ribu'];
+/* tombol cepat sesuai desain Figma "Booking - Chatbot" */
+const CH=['Jam buka','Alamat','Rekomendasi Menu','Order via GoFood','Order via GrabFood'];
 chips.innerHTML=CH.map(c=>`<button type="button">${c}</button>`).join('');
 const add=(h,u)=>{const d=document.createElement('div');d.className='m'+(u?' u':'');if(typeof h==='string')d.textContent=h;else d.append(h);msgs.append(d);msgs.scrollTop=msgs.scrollHeight;return d};
 function bot(r){const d=document.createElement('div');d.append(document.createTextNode(r.text));

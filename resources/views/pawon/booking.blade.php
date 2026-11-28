@@ -8,6 +8,7 @@
     <section class="wrap">
         @guest
             <div class="gate card">
+                <div class="lock" aria-hidden="true">🔒</div>
                 <h2>Akun Diperlukan Untuk Booking</h2>
                 <p>Daftar hanya butuh waktu singkat, dan Anda bisa langsung memesan meja setelahnya.</p>
                 <a class="btn" href="{{ route('register') }}">Daftar Sekarang</a>
