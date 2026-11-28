@@ -53,6 +53,12 @@ class Booking extends Model
         return Attribute::get(fn () => 'PRS-' . str_pad((string) $this->id, 4, '0', STR_PAD_LEFT));
     }
 
+    /** Jam seperti di desain, mis. "13.00". */
+    protected function jamLabel(): Attribute
+    {
+        return Attribute::get(fn () => str_replace(':', '.', substr($this->jam, 0, 5)));
+    }
+
     public function statusLabel(): string
     {
         return self::STATUS_LABEL[$this->status];

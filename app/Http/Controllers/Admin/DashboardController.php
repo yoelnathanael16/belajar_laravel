@@ -16,11 +16,13 @@ class DashboardController extends Controller
         $jumlah = Booking::selectRaw('status, count(*) as total')->groupBy('status')->pluck('total', 'status');
 
         return view('admin.dashboard', [
-            'jumlah' => [
-                'Menunggu konfirmasi' => $jumlah['menunggu'] ?? 0,
-                'Diterima, akan datang' => $akanDatang->count(),
-                'Selesai' => $jumlah['selesai'] ?? 0,
-                'Ditolak' => $jumlah['ditolak'] ?? 0,
+            // [judul, angka, keterangan kecil] untuk 4 kartu di atas
+            'kartu' => [
+                ['Menunggu konfirmasi', $jumlah['menunggu'] ?? 0, 'perlu keputusan Anda'],
+                ['Diterima, akan datang', $akanDatang->count(),
+                    'total Rp' . number_format($akanDatang->sum('total_harga'), 0, ',', '.')],
+                ['Selesai', $jumlah['selesai'] ?? 0, 'pesanan'],
+                ['Ditolak', $jumlah['ditolak'] ?? 0, 'pesanan'],
             ],
             'perluTindakan' => Booking::with('user')->where('status', 'menunggu')->orderBy('tanggal')->orderBy('jam')->get(),
             'sudahLewat' => $sudahLewat,

@@ -52,7 +52,7 @@ class PageController extends Controller
                 'ev' => $b->jenis_acara,
                 'g' => $b->jumlah_tamu,
                 'date' => $b->tanggal->toDateString(),
-                'time' => str_replace(':', '.', substr($b->jam, 0, 5)) . ' WIB',
+                'time' => $b->jam_label . ' WIB',
                 'items' => $b->items->map(fn ($i) => ['n' => $i->menu->nama_menu, 'q' => $i->qty])->all(),
                 'total' => $b->total_harga,
                 'status' => $b->statusLabel(),

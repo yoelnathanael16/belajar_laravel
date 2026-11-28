@@ -6,41 +6,41 @@
     <div class="head">
         <div>
             <h1>Ringkasan</h1>
-            <p class="small">{{ today()->translatedFormat('l, j F Y') }}</p>
+            <p class="sub">{{ today()->locale('id')->translatedFormat('l, j F Y') }}</p>
         </div>
     </div>
 
-    <div class="grid4">
-        @foreach ($jumlah as $label => $angka)
-            <div class="card"><span class="small">{{ $label }}</span><b>{{ $angka }}</b></div>
+    <div class="stats">
+        @foreach ($kartu as [$judul, $angka, $keterangan])
+            <div class="card stat"><span>{{ $judul }}</span><b>{{ $angka }}</b><span class="muted">{{ $keterangan }}</span></div>
         @endforeach
     </div>
 
-    <div class="grid2">
-        <section class="card">
-            <h2>Perlu ditindaklanjuti</h2>
-            <p class="small">Pesanan yang menunggu keputusan, diurutkan dari tanggal terdekat</p>
+    <div class="cols">
+        <section class="card panel">
+            <h2>Perlu ditindak lanjuti</h2>
+            <p class="muted">Pesanan yang menunggu keputusan, diurutkan dari tanggal terdekat.</p>
             @forelse ($perluTindakan as $b)
                 @include('admin.partials.booking-row', ['b' => $b, 'tombol' => 'Tinjau'])
             @empty
-                <p class="small">Tidak ada pesanan yang menunggu.</p>
+                <p class="muted">Tidak ada pesanan yang menunggu.</p>
             @endforelse
 
             @if ($sudahLewat->isNotEmpty())
-                <h3 class="small" style="margin-top:16px">Acara sudah lewat, tinggal ditandai selesai</h3>
+                <p class="subhead">Acara sudah lewat, tinggal ditandai selesai:</p>
                 @foreach ($sudahLewat as $b)
                     @include('admin.partials.booking-row', ['b' => $b, 'tombol' => 'Buka'])
                 @endforeach
             @endif
         </section>
 
-        <section class="card">
+        <section class="card panel">
             <h2>Jadwal yang akan datang</h2>
-            <p class="small">Pesanan yang sudah diterima</p>
+            <p class="muted">Pesanan yang sudah diterima.</p>
             @forelse ($akanDatang as $b)
                 @include('admin.partials.booking-row', ['b' => $b, 'tombol' => 'Buka'])
             @empty
-                <p class="small">Belum ada jadwal.</p>
+                <p class="muted">Belum ada jadwal.</p>
             @endforelse
         </section>
     </div>

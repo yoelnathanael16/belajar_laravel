@@ -1,7 +1,7 @@
-<div class="row">
+<div class="item">
     <div>
         <b>{{ $b->user->nama }} · {{ $b->jenis_acara }}</b>
-        <p class="small">{{ $b->tanggal->translatedFormat('j M Y') }}, {{ substr($b->jam, 0, 5) }} WIB · {{ $b->jumlah_tamu }}</p>
+        <span class="muted">{{ $b->tanggal->locale('id')->translatedFormat('j M Y') }}, {{ $b->jam_label }} WIB · {{ $b->jumlah_tamu }}</span>
     </div>
-    <a class="btn ghost" href="{{ route('admin.bookings.index', ['pesanan' => $b->id]) }}">{{ $tombol }}</a>
+    <a @class(['btn sm', 'ghost' => $tombol !== 'Tinjau']) href="{{ route('admin.bookings.index', ['pesanan' => $b->id]) }}">{{ $tombol }}</a>
 </div>
